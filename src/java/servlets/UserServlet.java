@@ -20,17 +20,16 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
-        
-
-        
+        boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+        if (ajax) {
+            System.out.println("AJAX Request! (UserServlet.doGet)");
+        }
         UserService us = new UserService();
         String action = request.getParameter("action");
         if (action != null && action.equals("view")) {
             String selectedUsername = request.getParameter("selectedUsername");
             try {
                 User user = us.get(selectedUsername);
-                boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
                 if (ajax) {
                     Gson gson = new Gson();
                     response.setContentType("application/json");
@@ -61,6 +60,10 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+        if (ajax) {
+            System.out.println("AJAX Request! (UserServlet.doPost)");
+        }
         String action = request.getParameter("action");
         String username = request.getParameter("username");
         String password = request.getParameter("password");

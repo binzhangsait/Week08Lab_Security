@@ -25,7 +25,10 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+        if (ajax) {
+            System.out.println("AJAX Request! (RegistrationServlet.doGet)");
+        }
         String action = request.getParameter("action");
         if (action != null && action.equals("checkUsername")) {
             String username = request.getParameter("username");

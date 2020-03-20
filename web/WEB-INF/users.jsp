@@ -45,7 +45,7 @@
                         </form>
                     </td>
                     <td>
-                        <form action="users" method="get">
+                        <form action="users" method="get" class="editform">
                             <input type="submit" value="Edit">
                             <input type="hidden" name="action" value="view">
                             <input type="hidden" name="selectedUsername" value="${user.username}">
